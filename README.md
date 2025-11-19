@@ -205,7 +205,7 @@ print(response.json())
 ## 👥 Authors & Credits
 
 ### Project Development
-- **Repository Owner**: [nomanrafi](https://github.com/nomanrafi)
+- **Repository Owner**: [Abdullah Al Noman](https://github.com/nomanrafi)
 - **Project Name**: SONAR Rock vs Mine Prediction
 - **Developed**: 2025
 
