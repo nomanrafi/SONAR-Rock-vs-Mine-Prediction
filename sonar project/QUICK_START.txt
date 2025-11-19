@@ -1,0 +1,114 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    🌊 QUICK START COMMAND REFERENCE 🌊                    ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+STEP 1: OPEN TERMINAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  🔹 PowerShell:     Win + X → Windows PowerShell
+  🔹 Command Prompt: Win + R → cmd → Enter
+  🔹 VS Code:        Ctrl + `
+
+STEP 2: NAVIGATE TO PROJECT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  cd "c:\Users\noman\Downloads\dengue_risk_checker_Website_using_ML-main\dengue_risk_checker_Website_using_ML-main\sonar project"
+
+  (Or just copy-paste the above path after "cd ")
+
+STEP 3: RUN THE APP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  OPTION A - PowerShell (Easiest):
+    .\RUN_APP.ps1
+
+  OPTION B - Command Prompt:
+    RUN_APP.bat
+
+  OPTION C - Manual (Both):
+    C:\Users\noman\anaconda3\python.exe app_sonar_predict.py
+
+STEP 4: OPEN BROWSER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  http://localhost:5000/
+
+  ✨ You should see the SONAR prediction form!
+
+STEP 5: TEST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✓ Click "Sample Rock" → Predict → See results
+  ✓ Click "Sample Mine" → Predict → See results
+  ✓ Or enter custom frequency values
+
+STOP THE APP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  In the terminal where Flask is running:
+    Press Ctrl + C
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                           🎯 EXPECTED RESULTS                             ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+TERMINAL OUTPUT (After running):
+  ✅ Models loaded successfully!
+  ✅ Running on http://127.0.0.1:5000
+  ✅ Running on http://192.168.0.105:5000
+
+BROWSER (http://localhost:5000):
+  ✅ SONAR frequency input form appears
+  ✅ 60 frequency band input fields
+  ✅ Sample buttons work
+  ✅ Predictions show results with confidence
+
+AFTER PREDICTION:
+  ✅ Object Type: Rock or Mine
+  ✅ Confidence: 85-95%
+  ✅ Risk Level: SAFE / MODERATE / HIGH / CRITICAL
+  ✅ Top 10 Frequency Bands: Listed with importance scores
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                         ⚠️  TROUBLESHOOTING                               ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+ERROR: "ModuleNotFoundError: No module named 'xgboost'"
+FIX:   Use Python 3.11 (conda), not system Python 3.13
+      ✓ Use RUN_APP.ps1 or RUN_APP.bat
+      ✗ Don't use plain "python" command
+
+ERROR: "Models not loaded. Please check system files."
+FIX:   Check that you're using Python 3.11:
+      1. Look at terminal output for version info
+      2. Use correct launcher script
+      3. Verify .pkl files exist in project folder
+
+ERROR: Port 5000 already in use
+FIX:   Try different port:
+      1. Edit app_sonar_predict.py line 520
+      2. Change: app.run(host='0.0.0.0', port=5001)
+      3. Open: http://localhost:5001
+
+ERROR: Can't open http://localhost:5000
+FIX:   Try these alternatives:
+      http://127.0.0.1:5000
+      http://192.168.0.105:5000
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                      📞 GETTING HELP                                      ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+1. Check SETUP_COMPLETE.txt for detailed setup info
+2. Read ISSUE_RESOLVED.txt for problem diagnosis
+3. See PROJECT_GUIDE.md for architecture details
+4. Review README.md for general info
+5. Look at app_sonar_predict.py comments for code explanation
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                      🎉 THAT'S IT! YOU'RE DONE! 🎉                        ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Your SONAR Rock vs Mine Prediction system is ready to use!
+
+Questions? Check the documentation files in the sonar project folder.

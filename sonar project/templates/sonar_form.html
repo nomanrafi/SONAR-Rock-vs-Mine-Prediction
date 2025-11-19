@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SonarCheck - Rock vs Mine Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --primary-dark: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #0f172a;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #f0f9ff;
+            --bg-light: #e0f2fe;
+            --border: #bae6fd;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0c4a6e 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--secondary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            border: 2px solid var(--secondary);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 50px;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+        }
+
+        .form-section h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        .frequency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .freq-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .freq-input label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .freq-input input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+
+        .freq-input input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: var(--bg-light);
+        }
+
+        .sample-data {
+            background: var(--bg);
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 14px 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(30, 64, 175, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg);
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--danger);
+        }
+
+        .sonar-specs {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .spec-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .spec-item h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .spec-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .footer {
+            background: rgba(15, 23, 42, 0.95);
+            color: var(--white);
+            text-align: center;
+            padding: 30px;
+            border-top: 2px solid var(--secondary);
+            margin-top: 50px;
+        }
+
+        .footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .frequency-grid {
+                grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+                gap: 10px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand">🌊 SonarCheck</a>
+            <ul class="nav-links">
+                <li><a href="/">Predict</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <h1>🎯 SONAR Rock vs Mine Detection</h1>
+            <p>AI-Powered Underwater Object Classification System</p>
+            <p style="font-size: 1rem; color: var(--text-light);">Enter SONAR frequency data to classify underwater objects</p>
+        </section>
+
+        <!-- SONAR SPECS -->
+        <section class="sonar-specs">
+            <h2 style="text-align: center; margin-bottom: 30px; color: var(--secondary);">📡 SONAR System Information</h2>
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <h3>🎛️ Frequency Bands</h3>
+                    <p><strong>Total:</strong> 60 frequency bands</p>
+                    <p><strong>Range:</strong> 11.25 kHz to 100 kHz</p>
+                </div>
+                <div class="spec-item">
+                    <h3>⚙️ Equipment</h3>
+                    <p><strong>Type:</strong> Goodman Tonals & Mirrorbird</p>
+                    <p><strong>Standard SONAR</strong></p>
+                </div>
+                <div class="spec-item">
+                    <h3>🎯 Application</h3>
+                    <p><strong>Purpose:</strong> Underwater object detection</p>
+                    <p><strong>Use Case:</strong> Mine detection & navigation</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORM SECTION -->
+        <section class="form-container">
+            <h1 style="text-align: center; color: var(--primary); margin-bottom: 30px;">Enter SONAR Frequency Data</h1>
+            
+            {% if error %}
+            <div class="error">
+                <i class="fas fa-exclamation-circle"></i> {{ error }}
+            </div>
+            {% endif %}
+
+            <form method="POST" id="predictionForm">
+                <div class="form-section">
+                    <h2>📊 Frequency Band Values (0.0 - 1.0)</h2>
+                    <p style="color: var(--text-light); margin-bottom: 20px;">
+                        Enter normalized amplitude values for each of the 60 SONAR frequency bands:
+                    </p>
+                    
+                    <div class="frequency-grid">
+                        {% for i in range(60) %}
+                        <div class="freq-input">
+                            <label for="freq_{{ i }}">Band {{ i }}</label>
+                            <input type="number" id="freq_{{ i }}" name="freq_{{ i }}" 
+                                   min="0" max="1" step="0.01" value="0.5" required>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="sample-data">
+                    <strong>💡 Quick Tips:</strong>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Values should be between 0.0 (no signal) and 1.0 (maximum signal)</li>
+                        <li>Rocks typically show smooth, distributed patterns across frequencies</li>
+                        <li>Mines show concentrated patterns in high-frequency bands (40-59)</li>
+                        <li>You can load sample data or enter custom values</li>
+                    </ul>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Predict Object Type
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="loadSampleRock()">
+                        <i class="fas fa-rock"></i> Sample Rock
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="loadSampleMine()">
+                        <i class="fas fa-bomb"></i> Sample Mine
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p><strong>SonarCheck</strong> - SONAR-based underwater object detection system</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">
+            Dataset: UCI Machine Learning Repository | 
+            <a href="/about">Learn More</a>
+        </p>
+    </footer>
+
+    <script>
+        function loadSampleRock() {
+            // Rock pattern: smooth, distributed across frequencies
+            const rockPattern = [
+                0.02, 0.04, 0.05, 0.03, 0.10, 0.10, 0.15, 0.16, 0.31, 0.21,
+                0.16, 0.16, 0.22, 0.07, 0.07, 0.23, 0.31, 0.30, 0.51, 0.48,
+                0.58, 0.51, 0.43, 0.56, 0.67, 0.64, 0.71, 0.81, 0.68, 0.39,
+                0.13, 0.26, 0.51, 0.75, 0.85, 0.85, 0.67, 0.61, 0.49, 0.27,
+                0.05, 0.28, 0.28, 0.43, 0.26, 0.14, 0.11, 0.13, 0.04, 0.03,
+                0.02, 0.03, 0.07, 0.02, 0.07, 0.02, 0.02, 0.01, 0.01, 0.00
+            ];
+            
+            for (let i = 0; i < 60; i++) {
+                document.getElementById(`freq_${i}`).value = rockPattern[i].toFixed(2);
+            }
+            alert('✅ Sample Rock data loaded. Click "Predict" to analyze.');
+        }
+
+        function loadSampleMine() {
+            // Mine pattern: concentrated in higher frequencies
+            const minePattern = [
+                0.01, 0.02, 0.03, 0.03, 0.06, 0.07, 0.12, 0.14, 0.15, 0.18,
+                0.21, 0.25, 0.28, 0.35, 0.42, 0.55, 0.62, 0.72, 0.80, 0.85,
+                0.89, 0.92, 0.88, 0.79, 0.71, 0.68, 0.64, 0.58, 0.52, 0.48,
+                0.42, 0.38, 0.35, 0.31, 0.28, 0.24, 0.20, 0.17, 0.15, 0.12,
+                0.10, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.03, 0.02, 0.02,
+                0.02, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.00
+            ];
+            
+            for (let i = 0; i < 60; i++) {
+                document.getElementById(`freq_${i}`).value = minePattern[i].toFixed(2);
+            }
+            alert('🚨 Sample Mine data loaded. Click "Predict" to analyze.');
+        }
+    </script>
+</body>
+</html>
