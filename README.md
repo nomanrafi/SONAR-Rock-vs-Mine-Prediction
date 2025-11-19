@@ -202,4 +202,13 @@ print(response.json())
 
 ---
 
+## 👥 Authors & Credits
+
+### Project Development
+- **Repository Owner**: [nomanrafi](https://github.com/nomanrafi)
+- **Project Name**: SONAR Rock vs Mine Prediction
+- **Developed**: 2025
+
 **Built with ❤️ using Python & Machine Learning**
+
+Special appreciation to all open-source developers and the ML community!
