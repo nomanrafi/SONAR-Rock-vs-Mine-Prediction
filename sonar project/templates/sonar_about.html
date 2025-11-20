@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About SonarCheck - Rock vs Mine Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --secondary: #0ea5e9;
+            --dark: #0f172a;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #f0f9ff;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0c4a6e 100%);
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            border: 2px solid var(--secondary);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--white);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .content-section {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-section h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 15px;
+        }
+
+        .content-section h3 {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .content-section p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .feature-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .highlight {
+            background: #fef3c7;
+            padding: 20px;
+            border-left: 4px solid #f59e0b;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .footer {
+            background: rgba(15, 23, 42, 0.95);
+            color: var(--white);
+            text-align: center;
+            padding: 30px;
+            border-top: 2px solid var(--secondary);
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand">🌊 SonarCheck</a>
+            <ul class="nav-links">
+                <li><a href="/">Predict</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HERO -->
+        <section class="hero-section">
+            <h1>📡 About SonarCheck</h1>
+            <p>Machine Learning-Powered SONAR-Based Object Detection System</p>
+        </section>
+
+        <!-- PROJECT OVERVIEW -->
+        <section class="content-section">
+            <h2>🎯 Project Overview</h2>
+            <p>
+                SonarCheck is an advanced machine learning application designed to classify underwater objects 
+                as either natural rocks or potential explosive mines using SONAR signal analysis. This system 
+                demonstrates the power of AI in maritime safety and naval applications.
+            </p>
+
+            <h3>Two Primary Goals</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🎯 Goal 1: Classification</h4>
+                    <p>Accurately predict whether a detected underwater object is a rock or mine using 60 SONAR frequency bands.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔍 Goal 2: Interpretation</h4>
+                    <p>Identify which SONAR frequencies are most important in distinguishing rocks from mines.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DATASET INFORMATION -->
+        <section class="content-section">
+            <h2>📊 Dataset Information</h2>
+            <h3>Source</h3>
+            <p><strong>UCI Machine Learning Repository</strong> - SONAR Dataset</p>
+            <p>This dataset is used for binary classification of underwater objects and is widely recognized in the machine learning community.</p>
+
+            <h3>Dataset Characteristics</h3>
+            <ul>
+                <li><strong>Total Samples:</strong> 208 instances</li>
+                <li><strong>Rocks:</strong> 111 samples</li>
+                <li><strong>Mines:</strong> 97 samples</li>
+                <li><strong>Features:</strong> 60 frequency bands (11.25 kHz to 100 kHz)</li>
+                <li><strong>Value Range:</strong> 0.0 to 1.0 (normalized amplitude)</li>
+            </ul>
+
+            <h3>Equipment Used</h3>
+            <ul>
+                <li><strong>SONAR Type:</strong> Goodman Tonals & Mirrorbird Standard SONAR</li>
+                <li><strong>Application:</strong> Underwater object detection and mine detection</li>
+                <li><strong>Frequency Range:</strong> 11.25 kHz to 100 kHz (60 bands total)</li>
+            </ul>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="content-section">
+            <h2>⚙️ How It Works</h2>
+
+            <h3>1. SONAR Frequency Data Input</h3>
+            <p>
+                Users provide 60 normalized frequency band values (0.0 to 1.0) representing SONAR echo signals 
+                across different frequency bands.
+            </p>
+
+            <h3>2. Machine Learning Models</h3>
+            <p><strong>Primary Model:</strong> XGBoost Classifier</p>
+            <ul>
+                <li>Ensemble gradient boosting method</li>
+                <li>Excellent for tabular data with complex patterns</li>
+                <li>Captures non-linear relationships in frequency data</li>
+            </ul>
+
+            <p style="margin-top: 15px;"><strong>Backup Model:</strong> Logistic Regression</p>
+            <ul>
+                <li>Simple, interpretable linear model</li>
+                <li>Used if primary model fails</li>
+                <li>Provides statistical confidence</li>
+            </ul>
+
+            <h3>3. Classification Process</h3>
+            <ol>
+                <li>Input frequency values are standardized (z-score normalization)</li>
+                <li>XGBoost model predicts object class (Rock or Mine)</li>
+                <li>Confidence probability is calculated (0-100%)</li>
+                <li>Risk level is determined based on confidence</li>
+                <li>Feature importance shows contributing frequency bands</li>
+            </ol>
+
+            <h3>4. Risk Assessment</h3>
+            <p>The system provides risk levels and recommendations:</p>
+            <ul>
+                <li><strong>CRITICAL:</strong> High confidence mine detected - immediate evasion</li>
+                <li><strong>HIGH:</strong> Probable mine - recommend caution</li>
+                <li><strong>MODERATE:</strong> Uncertain - recommend investigation</li>
+                <li><strong>SAFE:</strong> Likely rock - normal operations can continue</li>
+            </ul>
+        </section>
+
+        <!-- MODEL PERFORMANCE -->
+        <section class="content-section">
+            <h2>📈 Model Performance</h2>
+            <p>SonarCheck uses state-of-the-art machine learning techniques optimized for accurate classification:</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>✅ High Accuracy</h4>
+                    <p>XGBoost trained on full dataset with cross-validation for robust performance.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⚖️ Balanced Metrics</h4>
+                    <p>Optimized for both precision and recall to minimize false negatives (missed mines).</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔍 Feature Analysis</h4>
+                    <p>SHAP values and feature importance analysis explain model decisions.</p>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>🎓 Training Methodology:</strong>
+                <ul style="margin-top: 10px;">
+                    <li>80/20 train-test split with stratification</li>
+                    <li>5-fold cross-validation for reliability</li>
+                    <li>StandardScaler for feature normalization</li>
+                    <li>Threshold optimization for deployment</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SIGNAL PATTERNS -->
+        <section class="content-section">
+            <h2>🌊 SONAR Signal Patterns</h2>
+
+            <h3>🪨 Rock Signals</h3>
+            <p>Natural rocks produce smooth, distributed SONAR reflections across frequency bands:</p>
+            <ul>
+                <li>Smooth amplitude distribution</li>
+                <li>Gradual increase/decrease across frequencies</li>
+                <li>Low peak amplitudes</li>
+                <li>Natural decay patterns</li>
+            </ul>
+
+            <h3>💣 Mine Signals</h3>
+            <p>Manufactured mines produce concentrated SONAR signatures, especially in high frequencies:</p>
+            <ul>
+                <li>Sharp peaks in specific frequency bands</li>
+                <li>Concentrated energy in high frequencies (bands 40-59)</li>
+                <li>Distinct resonance patterns</li>
+                <li>Artificial symmetry in signal structure</li>
+            </ul>
+        </section>
+
+        <!-- APPLICATIONS -->
+        <section class="content-section">
+            <h2>🚢 Applications & Use Cases</h2>
+            <ul>
+                <li><strong>Naval Defense:</strong> Mine detection and maritime security</li>
+                <li><strong>Port Operations:</strong> Channel clearance and safety verification</li>
+                <li><strong>Research:</strong> Oceanographic exploration and object detection</li>
+                <li><strong>Training:</strong> Machine learning education and SONAR systems</li>
+                <li><strong>Automation:</strong> Autonomous underwater vehicle (AUV) guidance</li>
+            </ul>
+        </section>
+
+        <!-- DISCLAIMER -->
+        <section class="content-section">
+            <h2>⚖️ Important Disclaimer</h2>
+            <div class="highlight">
+                <strong>⚠️ For Research and Educational Purposes</strong>
+                <p style="margin-top: 10px;">
+                    SonarCheck is provided as an educational and analytical tool. This system should NOT be used 
+                    as the sole basis for real-world maritime safety decisions. All predictions must be validated by 
+                    trained operators following established naval protocols and international maritime safety standards.
+                </p>
+                <p style="margin-top: 10px;">
+                    Always consult with qualified professionals before taking actions based on predictions from this system.
+                </p>
+            </div>
+        </section>
+
+        <!-- TECHNOLOGY STACK -->
+        <section class="content-section">
+            <h2>💻 Technology Stack</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Backend</h4>
+                    <p>Python, Flask, scikit-learn, XGBoost, pandas, numpy</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Frontend</h4>
+                    <p>HTML5, CSS3, JavaScript, responsive design</p>
+                </div>
+                <div class="feature-card">
+                    <h4>ML Tools</h4>
+                    <p>Jupyter Notebook, SHAP, joblib, scikit-learn pipelines</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUTHOR -->
+        <section class="content-section">
+            <h2>👨‍💻 About This Project</h2>
+            <p>
+                SonarCheck was developed as a comprehensive machine learning project demonstrating:
+            </p>
+            <ul>
+                <li>End-to-end ML workflow from data to deployment</li>
+                <li>Binary classification on real-world dataset</li>
+                <li>Feature importance analysis and interpretability</li>
+                <li>Production-ready Flask web application</li>
+                <li>Modern, responsive user interface</li>
+            </ul>
+            <p style="margin-top: 20px; font-style: italic; color: var(--text-light);">
+                This project showcases professional machine learning practices and deployment techniques.
+            </p>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p><strong>SonarCheck</strong> - SONAR Rock vs Mine Classification System</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">
+            Dataset: UCI Machine Learning Repository | Built with Flask & Machine Learning
+        </p>
+    </footer>
+</body>
+</html>
