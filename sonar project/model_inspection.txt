@@ -1,0 +1,11 @@
+Loading model from: d:\git\GitHub\SONAR-Rock-vs-Mine-Prediction - Copy\sonar project\models\best_sonar_model.pkl
+Model Type: <class 'sklearn.pipeline.Pipeline'>
+Model is a Pipeline. Steps:
+  - scaler: <class 'sklearn.preprocessing._data.StandardScaler'>
+  - clf: <class 'xgboost.sklearn.XGBClassifier'>
+
+Loading backup model from: d:\git\GitHub\SONAR-Rock-vs-Mine-Prediction - Copy\sonar project\models\logistic_regression_model.pkl
+Backup Model Type: <class 'sklearn.pipeline.Pipeline'>
+Backup Model is a Pipeline. Steps:
+  - scaler: <class 'sklearn.preprocessing._data.StandardScaler'>
+  - clf: <class 'sklearn.linear_model._logistic.LogisticRegression'>
