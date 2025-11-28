@@ -5,6 +5,8 @@
 ![SONAR Detection](https://img.shields.io/badge/SONAR%20Classification-Rock%20vs%20Mine-blue?style=flat-square)
 ![ML Model](https://img.shields.io/badge/Model-XGBoost-brightgreen?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.12-yellow?style=flat-square)
+![Homepage](https://github.com/nomanrafi/SONAR-Rock-vs-Mine-Prediction/blob/main/homepage.png)
+![Result](https://github.com/nomanrafi/SONAR-Rock-vs-Mine-Prediction/blob/main/result.png)
 
 ## 🎯 Features
 
